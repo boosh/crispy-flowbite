@@ -1,0 +1,21 @@
+# dependencies
+django>=3.2
+django-crispy-forms>=2.0
+
+# dev
+pytest
+pytest-django
+coverage
+twine
+wheel
+black
+isort
+flake8
+django-coverage-plugin
+codecov
+pre-commit
+
+
+# docs
+sphinx
+sphinx-rtd-theme
