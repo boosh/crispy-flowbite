@@ -5,7 +5,7 @@
 {% else %}
     {# Opening Div and Label first #}
 
-    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if wrapper_class %}{{ wrapper_class }} {% endif %}{{ field_class }}">
+    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if wrapper_class %}{{ wrapper_class }} {% endif %}{{ field_class }} field-wrapper">
     {% if field.label and form_show_labels %}
         <label for="{{ field.id_for_label }}" class="{{ label_class }}">
             {{ field.label|safe }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
