@@ -83,37 +83,31 @@ def flowbite_field_class(field):
     return f" {flowbite_container.get_input_class(field)}"
 
 
-base_input = (
-    "bg-white focus:outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full "
-    "appearance-none leading-normal text-gray-700"
-)
-
 default_styles = {
-    "text": base_input,
-    "number": base_input,
+    "text": "",
+    "number": "",
     "radioselect": "",
-    "email": base_input,
-    "url": base_input,
-    "password": base_input,
+    "email": "",
+    "url": "",
+    "password": "",
     "hidden": "",
     "multiplehidden": "",
     "file": "",
     "clearablefile": "",
-    "textarea": base_input,
-    "date": base_input,
-    "datetime": base_input,
-    "time": base_input,
+    "textarea": "",
+    "date": "",
+    "datetime": "",
+    "time": "",
     "checkbox": "",
-    "select": "bg-white focus:outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal text-gray-700",
+    "select": "",
     "nullbooleanselect": "",
-    "selectmultiple": "bg-white focus:outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal text-gray-700",
+    "selectmultiple": "",
     "checkboxselectmultiple": "",
     "multi": "",
-    "splitdatetime": "text-gray-700 bg-white focus:outline border border-gray-300 leading-normal px-4 "
-    "appearance-none rounded-lg py-2 focus:outline-none mr-2",
+    "splitdatetime": "",
     "splithiddendatetime": "",
     "selectdate": "",
-    "error_border": "border-red-500",
+    "error_border": "",
 }
 
 # Overwrite flowbite_styles values with the CRISPY_FLOWBITE_STYLE values from settings
