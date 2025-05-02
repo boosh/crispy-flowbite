@@ -1,4 +1,4 @@
-<div{% if alert.css_id %} id="{{ alert.css_id }}"{% endif %} class="{{ alert.css_class|default:'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative' }}" role="alert">
+<div{% if alert.css_id %} id="{{ alert.css_id }}"{% endif %} class="{{ alert.css_class }}" role="alert">
     <div class="block sm:inline">{{ content|safe }}</div>
     {% if dismiss %}
         <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
