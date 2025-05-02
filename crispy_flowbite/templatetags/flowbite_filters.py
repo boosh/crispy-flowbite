@@ -1,5 +1,5 @@
-from functools import lru_cache
-
+from crispy_forms.exceptions import CrispyError
+from crispy_forms.utils import TEMPLATE_PACK, flatatt
 from django import template
 from django.conf import settings
 from django.forms import boundfield
@@ -7,9 +7,7 @@ from django.forms.formsets import BaseFormSet
 from django.template import Context
 from django.template.loader import get_template
 from django.utils.safestring import mark_safe
-
-from crispy_forms.exceptions import CrispyError
-from crispy_forms.utils import TEMPLATE_PACK, flatatt
+from functools import lru_cache
 
 
 @lru_cache()
@@ -27,7 +25,10 @@ register = template.Library()
 
 @register.filter(name="crispy")
 def as_crispy_form(
-    form, template_pack=TEMPLATE_PACK, label_class="block text-gray-700 text-sm font-bold mb-2", field_class="mb-3"
+    form,
+    template_pack=TEMPLATE_PACK,
+    label_class="block text-gray-700 text-sm font-bold mb-2",
+    field_class="mb-3",
 ):
     """
     The original and still very useful way to generate a div elegant form/formset::
@@ -150,5 +151,7 @@ def build_attrs(field):
     attrs.update(built_widget_attrs)
 
     if hasattr(field.field.widget, "allow_multiple_selected"):
-        attrs["multiple"] = attrs.get("multiple", field.field.widget.allow_multiple_selected)
+        attrs["multiple"] = attrs.get(
+            "multiple", field.field.widget.allow_multiple_selected
+        )
     return mark_safe(flatatt(attrs))

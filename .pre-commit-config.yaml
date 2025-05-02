@@ -24,8 +24,3 @@ repos:
         - id: ruff-format
           # without this precommits fail if files are reformatted so we need to commit twice
           entry: bash -c 'ruff format; git add -u' --
-
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort

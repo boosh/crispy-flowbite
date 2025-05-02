@@ -4,12 +4,14 @@ set dotenv-load := true
 name := ""
 path := ""
 
+system_env := env('ENV', 'dev')
+
 # List available upgrades of pip packages
 list-upgrades:
     pip list --outdated --format=columns
 
 # Run tests (optionally pass path/wildcard to a specific test file(s) to run)
-test *ARGS='': test-perms
+test *ARGS='':
   pytest {{ARGS}}
 
 freeze:
@@ -39,7 +41,7 @@ sync-reqs:
         echo "No virtualenv activated! Please activate one first."
         exit 1
     fi
-    mapfile -t req_files < <(find . -maxdepth 2 \( -name "requirements.txt" -o -name "requirements-{{django_env}}.txt" \))
+    mapfile -t req_files < <(find . -maxdepth 2 \( -name "requirements.txt" -o -name "requirements-{{system_env}}.txt" \))
     if [ ${#req_files[@]} -eq 0 ]; then
         echo "No matching requirements*.txt files found!"
         exit 1

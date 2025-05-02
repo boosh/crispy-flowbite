@@ -3,12 +3,11 @@
 # to meet requirements of Flowbite
 
 import re
-
+from crispy_forms.utils import TEMPLATE_PACK, get_template_pack
 from django import forms, template
 from django.conf import settings
 from django.template import Context, loader
 
-from crispy_forms.utils import TEMPLATE_PACK, get_template_pack
 from crispy_flowbite.flowbite import CSSContainer
 
 register = template.Library()
@@ -152,7 +151,11 @@ class CrispyFlowbiteFieldNode(template.Node):
 
         # There are special django widgets that wrap actual widgets,
         # such as forms.widgets.MultiWidget, admin.widgets.RelatedFieldWidgetWrapper
-        widgets = getattr(field.field.widget, "widgets", [getattr(field.field.widget, "widget", field.field.widget)])
+        widgets = getattr(
+            field.field.widget,
+            "widgets",
+            [getattr(field.field.widget, "widget", field.field.widget)],
+        )
 
         if isinstance(attrs, dict):
             attrs = [attrs] * len(widgets)
@@ -183,7 +186,11 @@ class CrispyFlowbiteFieldNode(template.Node):
             widget.attrs["class"] = css_class
 
             # HTML5 required attribute
-            if html5_required and field.field.required and "required" not in widget.attrs:
+            if (
+                html5_required
+                and field.field.required
+                and "required" not in widget.attrs
+            ):
                 if field.field.widget.__class__.__name__ != "RadioSelect":
                     widget.attrs["required"] = "required"
 
@@ -192,9 +199,13 @@ class CrispyFlowbiteFieldNode(template.Node):
                 attribute_name = template.Variable(attribute_name).resolve(context)
 
                 if attribute_name in widget.attrs:
-                    widget.attrs[attribute_name] += " " + template.Variable(attribute).resolve(context)
+                    widget.attrs[attribute_name] += " " + template.Variable(
+                        attribute
+                    ).resolve(context)
                 else:
-                    widget.attrs[attribute_name] = template.Variable(attribute).resolve(context)
+                    widget.attrs[attribute_name] = template.Variable(attribute).resolve(
+                        context
+                    )
 
         return str(field)
 
@@ -229,8 +240,16 @@ def crispy_addon(field, append="", prepend="", form_show_labels=True):
         {% crispy_addon form.my_field append=".00" %}
     """
     if field:
-        context = Context({"field": field, "form_show_errors": True, "form_show_labels": form_show_labels})
-        template = loader.get_template("%s/layout/prepended_appended_text.html" % get_template_pack())
+        context = Context(
+            {
+                "field": field,
+                "form_show_errors": True,
+                "form_show_labels": form_show_labels,
+            }
+        )
+        template = loader.get_template(
+            "%s/layout/prepended_appended_text.html" % get_template_pack()
+        )
         context["crispy_prepended_text"] = prepend
         context["crispy_appended_text"] = append
 

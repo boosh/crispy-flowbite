@@ -2,21 +2,42 @@ from django import forms
 
 
 class SampleForm(forms.Form):
-    is_company = forms.CharField(label="company", required=False, widget=forms.CheckboxInput())
-    email = forms.EmailField(
-        label="email", max_length=30, required=True, widget=forms.TextInput(), help_text="Insert your email"
+    is_company = forms.CharField(
+        label="company", required=False, widget=forms.CheckboxInput()
     )
-    password1 = forms.CharField(label="password", max_length=30, required=True, widget=forms.PasswordInput())
-    password2 = forms.CharField(label="re-enter password", max_length=30, required=True, widget=forms.PasswordInput())
-    first_name = forms.CharField(label="first name", max_length=5, required=True, widget=forms.TextInput())
-    last_name = forms.CharField(label="last name", max_length=5, required=True, widget=forms.TextInput())
-    datetime_field = forms.SplitDateTimeField(label="date time", widget=forms.SplitDateTimeWidget())
+    email = forms.EmailField(
+        label="email",
+        max_length=30,
+        required=True,
+        widget=forms.TextInput(),
+        help_text="Insert your email",
+    )
+    password1 = forms.CharField(
+        label="password", max_length=30, required=True, widget=forms.PasswordInput()
+    )
+    password2 = forms.CharField(
+        label="re-enter password",
+        max_length=30,
+        required=True,
+        widget=forms.PasswordInput(),
+    )
+    first_name = forms.CharField(
+        label="first name", max_length=5, required=True, widget=forms.TextInput()
+    )
+    last_name = forms.CharField(
+        label="last name", max_length=5, required=True, widget=forms.TextInput()
+    )
+    datetime_field = forms.SplitDateTimeField(
+        label="date time", widget=forms.SplitDateTimeWidget()
+    )
     tos_accepted = forms.ChoiceField(
         label="terms of service",
         widget=forms.Select(),
         choices=(("accepted", "Accepted"), ("not_accepted", "Not accepted")),
     )
-    select_multiple = forms.MultipleChoiceField(choices=[("1", "one"), ("2", "two"), ("3", "three")])
+    select_multiple = forms.MultipleChoiceField(
+        choices=[("1", "one"), ("2", "two"), ("3", "three")]
+    )
     select_required = forms.ChoiceField(
         choices=[("", "Select and option"), ("1", "one"), ("2", "two"), ("3", "three")],
         initial="2",

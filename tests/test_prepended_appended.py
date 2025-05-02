@@ -1,10 +1,9 @@
 import django
-from django.template import Template
-from django.test import SimpleTestCase
-
 from crispy_forms.bootstrap import AppendedText, PrependedAppendedText, PrependedText
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
+from django.template import Template
+from django.test import SimpleTestCase
 
 from .forms import CharFieldForm, SampleForm
 from .utils import parse_expected, parse_form
@@ -46,7 +45,9 @@ class CrispyHelperTests(SimpleTestCase):
         form.helper = FormHelper()
         form.helper.form_tag = False
         form.helper.layout = Layout(PrependedAppendedText("first_name", "www.", ".com"))
-        assert parse_form(form) == parse_expected("prepended/prepended_appended_text.html")
+        assert parse_form(form) == parse_expected(
+            "prepended/prepended_appended_text.html"
+        )
 
     def test_prepended_text_no_label(self):
         form = SampleForm()

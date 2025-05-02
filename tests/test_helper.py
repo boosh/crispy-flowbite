@@ -1,13 +1,17 @@
 import django
-from django.forms.models import formset_factory
-from django.template import Template
-from django.test import SimpleTestCase
-
-from crispy_forms.bootstrap import FieldWithButtons, InlineCheckboxes, InlineField, InlineRadios
+from crispy_forms.bootstrap import (
+    FieldWithButtons,
+    InlineCheckboxes,
+    InlineField,
+    InlineRadios,
+)
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import HTML, Column, Div, Field, Fieldset, Hidden, Layout, Row
 from crispy_forms.utils import render_crispy_form
 from crispy_tailwind.layout import Button, Reset, Submit
+from django.forms.models import formset_factory
+from django.template import Template
+from django.test import SimpleTestCase
 
 from .forms import (
     CharFieldForm,
@@ -112,7 +116,9 @@ class CrispyHelperTests(SimpleTestCase):
         assert parse_form(formset) == parse_expected(expected)
 
     def test_formset_with_errors(self):
-        SampleFormSet = formset_factory(ShortCharFieldForm, extra=1, max_num=2, validate_max=True)
+        SampleFormSet = formset_factory(
+            ShortCharFieldForm, extra=1, max_num=2, validate_max=True
+        )
         data = {
             "name-0-name": "test",
             "name-INITIAL_FORMS": "0",

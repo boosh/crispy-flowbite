@@ -1,9 +1,8 @@
 import django
-from django.forms import formset_factory
-from django.test import SimpleTestCase
-
 from crispy_forms.helper import FormHelper
 from crispy_tailwind.layout import Submit
+from django.forms import formset_factory
+from django.test import SimpleTestCase
 
 from .forms import SampleForm, ShortCharFieldForm
 from .utils import parse_expected, parse_form
@@ -26,7 +25,9 @@ class CrispyHelperTests(SimpleTestCase):
         assert parse_form(formset) == parse_expected(expected)
 
     def test_failing_table_inline_formset(self):
-        SampleFormSet = formset_factory(ShortCharFieldForm, extra=1, max_num=2, validate_max=True)
+        SampleFormSet = formset_factory(
+            ShortCharFieldForm, extra=1, max_num=2, validate_max=True
+        )
         data = {
             "name-0-name": "test",
             "name-INITIAL_FORMS": "0",

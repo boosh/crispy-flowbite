@@ -1,9 +1,8 @@
-from django.template import Context, Template
-
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
 from crispy_forms.utils import render_crispy_form
 from crispy_tailwind.tailwind import CSSContainer
+from django.template import Context, Template
 
 from .forms import CustomTextWidgetForm, SampleForm
 
@@ -64,7 +63,11 @@ def test_custom_widget():
     form = CustomTextWidgetForm()
     form.helper = FormHelper()
     html = render_crispy_form(form)
-    assert '<input type="text" name="first_name" class="customtextwidget " required id="id_first_name">' in html
     assert (
-        '<input type="text" name="last_name" class="custom-css customtextwidget " required id="id_last_name">' in html
+        '<input type="text" name="first_name" class="customtextwidget " required id="id_first_name">'
+        in html
+    )
+    assert (
+        '<input type="text" name="last_name" class="custom-css customtextwidget " required id="id_last_name">'
+        in html
     )

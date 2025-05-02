@@ -1,9 +1,7 @@
 import os
-from pathlib import Path
-
-from django.test.html import Element, parse_html
-
 from crispy_forms.utils import render_crispy_form
+from django.test.html import Element, parse_html
+from pathlib import Path
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -17,9 +15,15 @@ def contains_partial(haystack, needle):
     if not isinstance(needle, Element):
         needle = parse_html(needle)
 
-    if needle.name == haystack.name and set(needle.attributes).issubset(haystack.attributes):
+    if needle.name == haystack.name and set(needle.attributes).issubset(
+        haystack.attributes
+    ):
         return True
-    return any(contains_partial(child, needle) for child in haystack.children if isinstance(child, Element))
+    return any(
+        contains_partial(child, needle)
+        for child in haystack.children
+        if isinstance(child, Element)
+    )
 
 
 def parse_expected(expected_file):
