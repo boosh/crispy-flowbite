@@ -1,4 +1,4 @@
-from crispy_forms.bootstrap import Alert
+from crispy_forms.bootstrap import Alert, Accordion
 from crispy_forms.layout import BaseInput
 
 
@@ -63,3 +63,20 @@ class Button(BaseInput):
 
 class Alert(Alert):
     css_class = ""
+
+
+class Accordion(Accordion):
+    """
+    Flowbite Accordion menu object. It wraps `AccordionGroup` objects in a
+    container. It also allows the usage of always-open::
+
+        Accordion(
+            AccordionGroup("group name", "form_field_1", "form_field_2"),
+            AccordionGroup("another group name", "form_field"),
+            always_open=True
+        )
+    """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.always_open = kwargs.pop("always_open", False)
