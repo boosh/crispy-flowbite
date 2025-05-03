@@ -1,4 +1,6 @@
-from crispy_forms.bootstrap import Alert, Accordion
+from crispy_forms.bootstrap import Accordion as BSAccordion
+from crispy_forms.bootstrap import AccordionGroup as BSAccordionGroup
+from crispy_forms.bootstrap import Alert as BSAlert
 from crispy_forms.layout import BaseInput
 
 
@@ -61,11 +63,11 @@ class Button(BaseInput):
         super().__init__(*args, **kwargs)
 
 
-class Alert(Alert):
+class Alert(BSAlert):
     css_class = ""
 
 
-class Accordion(Accordion):
+class Accordion(BSAccordion):
     """
     Flowbite Accordion menu object. It wraps `AccordionGroup` objects in a
     container. It also allows the usage of always-open::
@@ -80,3 +82,44 @@ class Accordion(Accordion):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.always_open = kwargs.pop("always_open", False)
+
+
+class AccordionSingleInput(BSAccordion):
+    """
+    Customised Accordion intended to just wrap a single input to avoid overwhelming users with input boxes::
+
+        AccordionSingleInput(
+            AccordionSingleInputGroup(
+                "Email",
+                "email_address",
+                help_text="Your email address",
+            ),
+        ),
+
+    Note: help_text is hidden when expanded - make sure to also show
+    in the input (e.g. under it or as placeholder text)
+    """
+
+    template = "%s/accordion-single-input.html"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.always_open = kwargs.pop("always_open", True)
+        # self.help_text = kwargs.pop("help_text", "")
+
+
+class AccordionSingleInputGroup(BSAccordionGroup):
+    """
+    Customised Accordion intended to just wrap a single input to avoid overwhelming users with input boxes::
+
+        AccordionSingleInput(
+            AccordionSingleInputGroup("form_field", name="Input label", help_text="Some help text"),
+        )
+    """
+
+    template = "%s/accordion-single-input-group.html"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.always_open = kwargs.pop("always_open", True)
+        self.help_text = kwargs.pop("help_text", "")
