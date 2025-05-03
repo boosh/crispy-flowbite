@@ -1,4 +1,4 @@
-<h3 id="{{ div.css_id }}-accordion-heading" class="flex space-x-4">
+<h3 id="{{ div.css_id }}-accordion-heading" class="flex space-x-4 mb-3">
   <button type="button"
           class="flex items-center font-medium rtl:text-right text-blue-500 dark:text-blue-400 gap-2"
           data-accordion-target="#{{ div.css_id }}-accordion-body" aria-expanded="false"
@@ -16,6 +16,6 @@
   </button>
   <span class="font-normal text-base hide-when-open text-gray-700 dark:text-gray-200">{{ div.help_text }}</span>
 </h3>
-<div id="{{ div.css_id }}-accordion-body" class="hidden pt-2" aria-labelledby="{{ div.css_id }}-accordion-heading">
+<div id="{{ div.css_id }}-accordion-body" class="hidden" aria-labelledby="{{ div.css_id }}-accordion-heading">
   {{ fields|safe }}
 </div>

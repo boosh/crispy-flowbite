@@ -1,6 +1,8 @@
-from crispy_forms.bootstrap import Accordion as BSAccordion
-from crispy_forms.bootstrap import AccordionGroup as BSAccordionGroup
-from crispy_forms.bootstrap import Alert as BSAlert
+from crispy_forms.bootstrap import (
+    Accordion as BSAccordion,
+    AccordionGroup as BSAccordionGroup,
+    Alert as BSAlert,
+)
 from crispy_forms.layout import BaseInput
 
 
@@ -86,13 +88,18 @@ class Accordion(BSAccordion):
 
 class AccordionSingleInput(BSAccordion):
     """
-    Customised Accordion intended to just wrap a single input to avoid overwhelming users with input boxes::
+    Customised Accordion where each item is intended to just wrap a single input to avoid overwhelming users with input boxes. But note, this container can contain multiple such items::
 
         AccordionSingleInput(
             AccordionSingleInputGroup(
                 "Email",
                 "email_address",
                 help_text="Your email address",
+            ),
+            AccordionSingleInputGroup(
+                "Password",
+                "password",
+                help_text="Your password",
             ),
         ),
 
@@ -105,7 +112,6 @@ class AccordionSingleInput(BSAccordion):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.always_open = kwargs.pop("always_open", True)
-        # self.help_text = kwargs.pop("help_text", "")
 
 
 class AccordionSingleInputGroup(BSAccordionGroup):
@@ -113,13 +119,21 @@ class AccordionSingleInputGroup(BSAccordionGroup):
     Customised Accordion intended to just wrap a single input to avoid overwhelming users with input boxes::
 
         AccordionSingleInput(
-            AccordionSingleInputGroup("form_field", name="Input label", help_text="Some help text"),
-        )
+            AccordionSingleInputGroup(
+                "Email",
+                "email_address",
+                help_text="Your email address",
+            ),
+            AccordionSingleInputGroup(
+                "Password",
+                "password",
+                help_text="Your password",
+            ),
+        ),
     """
 
     template = "%s/accordion-single-input-group.html"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.always_open = kwargs.pop("always_open", True)
         self.help_text = kwargs.pop("help_text", "")
