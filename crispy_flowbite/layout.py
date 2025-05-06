@@ -90,6 +90,12 @@ class Accordion(BSAccordion):
         self.always_open = kwargs.pop("always_open", False)
 
 
+class AccordionGroup(BSAccordionGroup):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.help_text = kwargs.pop("help_text", "")
+
+
 class AccordionSingleInput(BSAccordion):
     """
     Customised Accordion where each item is intended to just wrap a single input to avoid overwhelming users with input boxes. But note, this container can contain multiple such items::
