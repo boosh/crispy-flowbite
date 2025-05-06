@@ -147,3 +147,4 @@ class AccordionSingleInputGroup(BSAccordionGroup):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.help_text = kwargs.pop("help_text", "")
+        self.initially_open = kwargs.pop("initially_open", False)

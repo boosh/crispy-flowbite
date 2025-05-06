@@ -1,21 +1,23 @@
-<h3 id="{{ div.css_id }}-accordion-heading" class="flex space-x-4 mb-3">
-  <button type="button"
-          class="flex items-center font-medium rtl:text-right text-blue-500 dark:text-blue-400 gap-2"
-          data-accordion-target="#{{ div.css_id }}-accordion-body" aria-expanded="false"
-          aria-controls="{{ div.css_id }}-accordion-body">
+<div class="{{ div.css_class|default:"" }}">
+  <h3 id="{{ div.css_id }}-accordion-heading" class="flex space-x-4 mb-3">
+    <button type="button"
+            class="flex items-center font-medium rtl:text-right text-blue-500 dark:text-blue-400 gap-2"
+            data-accordion-target="#{{ div.css_id }}-accordion-body" aria-expanded="{% if div.initially_open %}true{% else %}false{% endif %}"
+            aria-controls="{{ div.css_id }}-accordion-body">
 
-    <svg data-accordion-icon class="w-3 h-3 hide-when-open" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-         height="24" fill="none" viewBox="0 0 24 24">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14m-7 7V5"/>
-    </svg>
-    <svg class="w-3 h-3 hide-when-closed" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14"/>
-    </svg>
+      <svg data-accordion-icon class="w-3 h-3 hide-when-open" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+           height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14m-7 7V5"/>
+      </svg>
+      <svg class="w-3 h-3 hide-when-closed" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14"/>
+      </svg>
 
-    <span class="text-base">{{ div.name }}</span>
-  </button>
-  <span class="font-normal text-base hide-when-open text-gray-700 dark:text-gray-200">{{ div.help_text }}</span>
-</h3>
-<div id="{{ div.css_id }}-accordion-body" class="hidden" aria-labelledby="{{ div.css_id }}-accordion-heading">
-  {{ fields|safe }}
+      <span class="text-base">{{ div.name }}</span>
+    </button>
+    <span class="font-normal text-base hide-when-open text-gray-700 dark:text-gray-200">{{ div.help_text }}</span>
+  </h3>
+  <div id="{{ div.css_id }}-accordion-body" class="hidden" aria-labelledby="{{ div.css_id }}-accordion-heading">
+    {{ fields|safe }}
+  </div>
 </div>
