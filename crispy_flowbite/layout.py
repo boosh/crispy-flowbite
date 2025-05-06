@@ -3,7 +3,7 @@ from crispy_forms.bootstrap import (
     AccordionGroup as BSAccordionGroup,
     Alert as BSAlert,
 )
-from crispy_forms.layout import BaseInput
+from crispy_forms.layout import BaseInput, Field
 
 
 class Submit(BaseInput):
@@ -67,6 +67,10 @@ class Button(BaseInput):
 
 class Alert(BSAlert):
     css_class = ""
+
+
+class Toggle(Field):
+    template = "%s/layout/toggle.html"
 
 
 class Accordion(BSAccordion):
