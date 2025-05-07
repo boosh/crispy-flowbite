@@ -3,7 +3,39 @@ from crispy_forms.bootstrap import (
     AccordionGroup as BSAccordionGroup,
     Alert as BSAlert,
 )
-from crispy_forms.layout import BaseInput, Field
+from crispy_forms.layout import BaseInput, Field, LayoutObject
+from crispy_forms.utils import render_field
+
+
+class ConditionalLayout(LayoutObject):
+    """
+    A layout object that renders its contents only if a condition (lambda) evaluates to True.
+    Otherwise renders nothing.
+
+    E.g.:
+
+        ConditionalLayout(
+            lambda: not self.is_campaign,
+            "primary_keywords"
+        ),
+    """
+
+    def __init__(self, condition, *fields):
+        self.condition = condition
+        self.fields = list(fields)
+
+    def render(self, form, context, template_pack=None, **kwargs):
+        """
+        Renders this layout object
+        """
+        if callable(self.condition) and self.condition():
+            html = ""
+            for field in self.fields:
+                html += render_field(
+                    field, form, context, template_pack=template_pack, **kwargs
+                )
+            return html
+        return ""
 
 
 class Submit(BaseInput):
