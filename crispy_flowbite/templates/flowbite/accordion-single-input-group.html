@@ -15,7 +15,7 @@
 
       <span class="text-base">{{ div.name }}</span>
     </button>
-    <span class="font-normal text-base text-gray-700 dark:text-gray-200">{{ div.help_text }}</span>
+    <span class="font-normal text-base hide-when-open text-gray-700 dark:text-gray-200">{{ div.help_text }}</span>
   </h3>
   <div id="{{ div.css_id }}-accordion-body" class="hidden" aria-labelledby="{{ div.css_id }}-accordion-heading">
     {{ fields|safe }}
