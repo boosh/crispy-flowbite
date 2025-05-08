@@ -13,11 +13,7 @@
     {% endif %}
 
     {# if field has a special template then use this #}
-    {% if field|is_select %}
-        <div class="{{ field_class }}"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
-            {% include 'flowbite/layout/select.html' %}
-        </div>
-    {% elif field|is_checkboxselectmultiple %}
+    {% if field|is_checkboxselectmultiple %}
         <div class="{{ field_class }}"{% if flat_attrs %} {{ flat_attrs|safe }}{% endif %}>
             {% include 'flowbite/layout/checkboxselectmultiple.html' %}
         </div>
