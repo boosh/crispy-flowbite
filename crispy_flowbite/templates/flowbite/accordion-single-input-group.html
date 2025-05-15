@@ -13,7 +13,7 @@
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14"/>
       </svg>
 
-      <span class="text-base">{{ div.name }}</span>
+      <span class="text-base">{{ div.name|safe }}</span>
     </button>
     <span class="font-normal text-base hide-when-open text-gray-700 dark:text-gray-200">{{ div.help_text }}</span>
   </h3>
