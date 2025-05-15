@@ -6,7 +6,7 @@
       {% include 'flowbite/layout/help_text.html' %}
     </div>
     <div>
-      <input type="checkbox" id="div_{{ field.auto_id }}" value="{{ input.value }}" {% if field.value %}checked{% endif %}
+      <input type="checkbox" id="div_{{ field.auto_id }}" name="{{ field.html_name }}"  value="on" {% if field.value %}checked{% endif %}
              {% include "flowbite/layout/attrs.html" with widget=field.field.widget %}
              class="sr-only peer">
       <div class="toggle
