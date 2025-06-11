@@ -1,6 +1,6 @@
 <div data-accordion="{% if accordion.always_open %}open{% else %}collapse{% endif %}"
      data-active-classes="text-blue-600 dark:text-blue-500"
      data-inactive-classes="text-blue-500 dark:text-blue-400"
-     class="{{ accordion.css_class|default:"" }}" id="{{ accordion.css_id }}">
+     class="{{ accordion.css_class|default:"" }}" id="{{ accordion.css_id }}" {{ accordion.flat_attrs|safe }}>
   {{ content|safe }}
 </div>
