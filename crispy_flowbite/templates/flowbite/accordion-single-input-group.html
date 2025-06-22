@@ -13,9 +13,9 @@
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14"/>
       </svg>
 
-      <span class="text-base">{{ div.name|safe }}</span>
+      <span class="text-base">{{ div.name|safe }}{% if div.required %}<span class="asteriskField">*</span>{% endif %}</span>
     </button>
-    <span class="font-normal text-base hide-when-open text-gray-700 dark:text-gray-200">{{ div.help_text }}</span>
+    <span class="font-normal text-base hide-when-open text-gray-700 dark:text-gray-200">{{ div.help_text|safe }}</span>
   </h3>
   <div id="{{ div.css_id }}-accordion-body" class="hidden" aria-labelledby="{{ div.css_id }}-accordion-heading">
     {{ fields|safe }}
