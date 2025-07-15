@@ -1,5 +1,5 @@
 <div data-accordion="{% if accordion.always_open %}open{% else %}collapse{% endif %}"
      data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-     data-inactive-classes="text-gray-500 dark:text-gray-400" class="{{ accordion.css_class|default:"" }}" id="{{ accordion.css_id }}">
+     data-inactive-classes="text-gray-500 dark:text-gray-400" class="{{ accordion.css_class|default:"" }}" id="{{ accordion.css_id }}" {{ accordion.flat_attrs|safe }}>
   {{ content|safe }}
 </div>
