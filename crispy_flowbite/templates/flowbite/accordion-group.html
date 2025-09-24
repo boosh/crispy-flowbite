@@ -1,7 +1,7 @@
 <h3 id="{{ div.css_id }}-accordion-heading" class="block mb-4">
   <button type="button"
           class="w-full pb-3 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3"
-          data-accordion-target="#{{ div.css_id }}-accordion-body" aria-expanded="false"
+          data-accordion-target="#{{ div.css_id }}-accordion-body" aria-expanded="{% if div.initially_open %}true{% else %}false{% endif %}"
           aria-controls="{{ div.css_id }}-accordion-body">
 
     <div class="flex items-center w-full space-x-4">
