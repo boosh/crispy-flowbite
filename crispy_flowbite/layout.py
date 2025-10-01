@@ -178,7 +178,13 @@ class AccordionSingleInputGroup(BSAccordionGroup):
     template = "%s/accordion-single-input-group.html"
 
     def __init__(self, *args, **kwargs):
+        """
+        :param kwargs:
+          - help_text: Help text to display next to the header when the accordion is closed
+          - help_text_open: Help text to display next to the header when the accordion is open
+        """
         super().__init__(*args, **kwargs)
         self.help_text = kwargs.pop("help_text", "")
+        self.help_text_open = kwargs.pop("help_text_open", "")
         self.initially_open = kwargs.pop("initially_open", False)
         self.required = kwargs.pop("required", False)
