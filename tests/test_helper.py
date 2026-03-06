@@ -167,7 +167,7 @@ class CrispyHelperTests(SimpleTestCase):
             Submit(
                 "submit",
                 "Submit",
-                css_class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
+                css_class="bg-transparent hover:bg-primary-500 text-primary-700 font-semibold hover:text-white py-2 px-4 border border-primary-500 hover:border-transparent rounded",
             )
         )
         assert parse_form(form) == parse_expected("helper/buttons_with_css.html")
