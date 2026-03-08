@@ -1,0 +1,17 @@
+<div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="{{ tabs.css_id }}" data-tabs-toggle="#{{ tabs.css_id }}-content" role="tablist">
+        {% for group in tabs.groups %}
+        <li class="me-2" role="presentation">
+            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-primary-600 hover:border-primary-300 dark:hover:text-primary-400 dark:hover:border-primary-500"
+                    id="{{ group.css_id }}-tab" data-tabs-target="#{{ group.css_id }}"
+                    type="button" role="tab" aria-controls="{{ group.css_id }}"
+                    aria-selected="{% if group.active %}true{% else %}false{% endif %}">
+                {{ group.name }}
+            </button>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div id="{{ tabs.css_id }}-content">
+    {{ content|safe }}
+</div>

@@ -2,9 +2,14 @@ from crispy_forms.bootstrap import (
     Accordion as BSAccordion,
     AccordionGroup as BSAccordionGroup,
     Alert as BSAlert,
+    ContainerHolder,
 )
 from crispy_forms.layout import BaseInput, Field, LayoutObject
 from crispy_forms.utils import render_field
+from django.template.loader import render_to_string
+from django.utils.safestring import SafeString
+from django.utils.text import slugify
+from random import randint
 
 
 class ConditionalLayout(LayoutObject):
@@ -190,3 +195,63 @@ class AccordionSingleInputGroup(BSAccordionGroup):
         self.help_text_open = kwargs.pop("help_text_open", "")
         self.initially_open = kwargs.pop("initially_open", False)
         self.required = kwargs.pop("required", False)
+
+
+class Tabs(ContainerHolder):
+    """
+    Flowbite Tabs layout object. Wraps ``TabGroup`` objects in a tabbed
+    container using Flowbite's ``data-tabs-toggle``::
+
+        Tabs(
+            TabGroup("Profile", "first_name", "last_name"),
+            TabGroup("Settings", "email", active=True),
+        )
+    """
+
+    template = "%s/tabs.html"
+
+    def __init__(
+        self, *tab_groups, css_id=None, css_class=None, template=None, **kwargs
+    ):
+        super().__init__(
+            *tab_groups, css_id=css_id, css_class=css_class, template=template, **kwargs
+        )
+        if not self.css_id:
+            self.css_id = f"tabs-{randint(1000, 9999)}"
+
+        # Auto-assign css_id to groups that don't have one
+        for group in tab_groups:
+            if not getattr(group, "css_id", None):
+                group.css_id = f"{self.css_id}-{slugify(group.name)}"
+
+        # If no group is explicitly active, activate the first one
+        if not any(getattr(g, "active", False) for g in tab_groups):
+            if tab_groups:
+                tab_groups[0].active = True
+
+        self.groups = list(tab_groups)
+
+    def render(self, form, context, template_pack=None, **kwargs):
+        content = SafeString("")
+        for group in self.fields:
+            content += render_field(
+                group, form, context, template_pack=template_pack, **kwargs
+            )
+
+        template = self.get_template_name(template_pack)
+        context.update({"tabs": self, "content": content})
+        return render_to_string(template, context.flatten())
+
+
+class TabGroup(BSAccordionGroup):
+    """
+    A single tab pane within a ``Tabs`` container::
+
+        TabGroup("Tab title", "form_field_1", "form_field_2", active=True)
+    """
+
+    template = "%s/tab-group.html"
+
+    def __init__(self, *args, **kwargs):
+        self.active = kwargs.pop("active", False)
+        super().__init__(*args, **kwargs)
